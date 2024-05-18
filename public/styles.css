@@ -48,56 +48,9 @@ main {
   display: none;
 }
 .thumbnail-container:hover .delete-button {
-  display: b
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-  position: relative;
+  display: block;
 }
-main {
-  flex: 1;
-  padding: 20px;
+#uploadButton {
+  margin-top: 20px;
 }
-.thumbnail-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 10px;
-  background: #932222;
-  justify-content: center;
-}
-.thumbnail-container {
-  position: relative;
-}
-.thumbnail, .fullsize {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  cursor: pointer;
-}
-.fullsize {
-  width: auto;
-  height: auto;
-  max-width: 300px;
-  max-height: 300px;
-  display: block; /* Ensure full-size images take up the full width available */
-  margin: 10px auto; /* Center the full-size images and provide some margin */
-}
-.delete-button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  display: none;
-}
-.thumbnail-container:hover .delete-button {
-  display: b
 
