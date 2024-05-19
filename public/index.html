@@ -11,35 +11,45 @@
     <div id="imageGrid"></div>
     <input type="file" id="fileInput" style="display: none;" />
     <button id="uploadButton">Upload Image</button>
+    <button id="toggleDeleteButton">Delete Image</button>
   </main>
   <div class="thumbnail-grid" id="thumbnailGrid"></div>
 
   <script>
+    const deleteMode = { enabled: false };
+  
     document.getElementById('uploadButton').addEventListener('click', () => {
       document.getElementById('fileInput').click();
     });
-
+  
     document.getElementById('fileInput').addEventListener('change', async (event) => {
       const file = event.target.files[0];
       const formData = new FormData();
       formData.append('image', file);
-
+  
       const response = await fetch('/upload', {
         method: 'POST',
         body: formData
       });
-
+  
       const result = await response.json();
       addThumbnail(result.thumbnail, result.fullsize);
     });
-
+  
+    document.getElementById('toggleDeleteButton').addEventListener('click', () => {
+      deleteMode.enabled = !deleteMode.enabled;
+      document.querySelectorAll('.delete-button').forEach(button => {
+        button.style.display = deleteMode.enabled ? 'block' : 'none';
+      });
+    });
+  
     const thumbnailGrid = document.getElementById('thumbnailGrid');
     const imageGrid = document.getElementById('imageGrid');
-
+  
     function addThumbnail(thumbnailSrc, fullsizeSrc) {
       const thumbnailContainer = document.createElement('div');
       thumbnailContainer.classList.add('thumbnail-container');
-
+  
       const img = document.createElement('img');
       img.src = thumbnailSrc;
       img.classList.add('thumbnail');
@@ -47,10 +57,11 @@
       img.dataset.fullsize = fullsizeSrc;
       img.addEventListener('click', toggleImageSize);
       thumbnailContainer.appendChild(img);
-
+  
       const deleteButton = document.createElement('button');
       deleteButton.classList.add('delete-button');
       deleteButton.innerText = 'X';
+      deleteButton.style.display = 'none';  // Hide delete button initially
       deleteButton.addEventListener('click', async () => {
         const filename = thumbnailSrc.split('/').pop();
         const response = await fetch(`/delete/${filename}`, {
@@ -63,10 +74,10 @@
         }
       });
       thumbnailContainer.appendChild(deleteButton);
-
+  
       thumbnailGrid.appendChild(thumbnailContainer);
     }
-
+  
     function toggleImageSize(event) {
       const img = event.target;
       if (img.classList.contains('thumbnail')) {
@@ -82,7 +93,7 @@
         img.style.display = 'none';
       }
     }
-
+  
     // Load existing thumbnails on page load
     window.onload = async () => {
       const response = await fetch('/thumbnails');
@@ -90,6 +101,6 @@
       thumbnails.forEach(({ thumbnail, fullsize }) => addThumbnail(thumbnail, fullsize));
     };
   </script>
-</body>
+  </body>
 </html>
 

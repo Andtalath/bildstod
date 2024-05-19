@@ -21,16 +21,16 @@ main {
   position: relative;
 }
 .thumbnail, .fullsize {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   object-fit: cover;
   cursor: pointer;
 }
 .fullsize {
   width: auto;
   height: auto;
-  max-width: 300px;
-  max-height: 300px;
+  max-width: 50%;
+  max-height: 50%;
   display: block; /* Ensure full-size images take up the full width available */
   margin: 10px auto; /* Center the full-size images and provide some margin */
 }
@@ -38,7 +38,7 @@ main {
   position: absolute;
   top: 5px;
   right: 5px;
-  background-color: #ff4d4d;
+  background-color: #4df0ff;
   color: white;
   border: none;
   border-radius: 50%;
