@@ -29,8 +29,8 @@ main {
 .fullsize {
   width: auto;
   height: auto;
-  max-width: 50%;
-  max-height: 50%;
+  max-width: 300px;
+  max-height: 300px;
   display: block; /* Ensure full-size images take up the full width available */
   margin: 10px auto; /* Center the full-size images and provide some margin */
 }
